@@ -1,4 +1,4 @@
-# Node.js addon for generating OTPs with YubiKey
+# Node.js addon for USB communication with OnlyKey
 
 ## Pre-requisites
 
@@ -20,18 +20,6 @@ $ make check
 $ sudo make install
 ```
 
-## Configuring YubiKey
-
-Configure your YubiKey in HMAC challenge-response mode:
-
-```
-$ slot=1
-$ ykpersonalize -$slot -ochal-resp -ochal-hmac
-```
-
-Note, YubiKey has two slots, so one can configure both slots
-in this mode if supporting 2 identities is required.
-
 ## Building the module
 
 Compile the code:
@@ -50,12 +38,3 @@ $ node example.js
 $ npm install onlykey_usb
 ```
 
-Test installation:
-
-```
-var m = require('onlykey_usb')
-var slot = 1
-var ts = new Date().getTime();
-var otp = m.genOtp(ts, slot)
-console.log('OTP for timestamp ' + ts + ' is ' + otp);
-```
