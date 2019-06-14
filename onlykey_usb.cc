@@ -34,14 +34,13 @@
 
 /* Standard C/C++ function declaratoins */
 #include <stdio.h>
-#include <unistd.h>
 #include <time.h>
 
 /* YubiKey specific function declarations */
-#include <yubikey.h>
-#include "ykpers/ykcore/ykdef.h"
-#include "ykpers/ykcore/ykcore.h"
-#include "ykpers/ykcore/ykstatus.h"
+#include "yubico-c/yubikey.h"
+#include "yubikey-personalization/ykcore/ykdef.h"
+#include "yubikey-personalization/ykcore/ykcore.h"
+#include "yubikey-personalization/ykcore/ykstatus.h"
 
 /* Node V8 function declarations */
 #include <iostream>
