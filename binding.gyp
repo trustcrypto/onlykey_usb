@@ -8,6 +8,9 @@
                 '_LARGEFILE_SOURCE',
                 '_FILE_OFFSET_BITS=64',
             ],
+            "include_dirs" : [
+                "<!(node -e \"require('nan')\")"
+            ],
             'conditions': [
                 [ 'OS=="mac"', {
             		"libraries": [
