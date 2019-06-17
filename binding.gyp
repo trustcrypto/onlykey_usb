@@ -1,5 +1,9 @@
 
 {
+    "dll_files" : [
+        'windows\bin\libykpers-1-1.dll',
+        'windows\bin\libyubikey.dll'
+    ],
     'targets': [
         {
             'target_name': 'HID',
@@ -38,7 +42,7 @@
                 [ 'OS=="win"', {
                     'msvs_settings': {
                         'VCLinkerTool': {
-                            'AdditionalLibraryDirectories': '\\windows\\lib',
+                            'AdditionalLibraryDirectories': ['C:\\msys64\\mingw64\\lib'],
                             'AdditionalDependencies': ['setupapi.lib']
                         }
                     },
@@ -58,3 +62,4 @@
 
     ]
 }
+
