@@ -38,9 +38,15 @@
                 [ 'OS=="win"', {
                     'msvs_settings': {
                         'VCLinkerTool': {
-                            'AdditionalDependencies': ['setupapi.lib']
+                            'AdditionalLibraryDirectories': '.\\windows\\lib',
                         }
-                    }
+                    },
+                    'libraries': [
+                      '-llibyubikey.dll.a',
+                      '-llibyubikey.a',
+                      '-llibykpers-1.dll.a',
+                      '-llibykpers-1.a',
+                    ],
                 }] # OS==win
             ],
             'cflags!': ['-ansi', '-fno-exceptions' ],

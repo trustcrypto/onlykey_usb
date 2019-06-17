@@ -115,14 +115,14 @@
 #include <stdlib.h>
 #include <node.h>
 #include <nan.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <time.h>
 
 /* YubiKey specific function declarations */
-#include <yubikey.h>
-#include "yubikey-personalization/ykcore/ykdef.h"
-#include "yubikey-personalization/ykcore/ykcore.h"
-#include "yubikey-personalization/ykcore/ykstatus.h"
+#include "include/yubikey.h"
+#include "include/ykcore/ykdef.h"
+#include "include/ykcore/ykcore.h"
+#include "include/ykcore/ykstatus.h"
 
 /* Node V8 function declarations */
 #include <iostream>
