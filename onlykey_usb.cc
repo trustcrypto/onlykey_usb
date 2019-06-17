@@ -371,8 +371,6 @@ NAN_METHOD(HID::New)
       // open by path
       hid = new HID();
     } else {
-      int32_t vendorId = Nan::To<int32_t>(info[0]).FromJust();
-      int32_t productId = Nan::To<int32_t>(info[1]).FromJust();
       wchar_t wserialstr[100]; // FIXME: is there a better way?
       wchar_t* wserialptr = NULL;
       if (info.Length() > 2) {

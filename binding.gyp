@@ -2,7 +2,7 @@
 {
     'targets': [
         {
-            'target_name': 'onlykey_usb',
+            'target_name': 'HID',
             'sources': [ 'onlykey_usb.cc' ],
             'defines': [
                 '_LARGEFILE_SOURCE',
@@ -33,12 +33,13 @@
                 [ 'OS=="linux"', {
             		"libraries": [
 					"-lm", "-lykpers-1.1", "-lyubikey"
-				        ]
+				    ]
                 }], # OS==linux
                 [ 'OS=="win"', {
                     'msvs_settings': {
                         'VCLinkerTool': {
                             'AdditionalLibraryDirectories': '\\windows\\lib',
+                            'AdditionalDependencies': ['setupapi.lib']
                         }
                     },
                     'libraries': [
