@@ -38,7 +38,7 @@
                 [ 'OS=="win"', {
                     'msvs_settings': {
                         'VCLinkerTool': {
-                            'AdditionalLibraryDirectories': '.\\windows\\lib',
+                            'AdditionalLibraryDirectories': '\\windows\\lib',
                         }
                     },
                     'libraries': [
