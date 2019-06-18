@@ -119,10 +119,10 @@
 #include <time.h>
 
 /* YubiKey specific function declarations */
-#include "include/yubikey.h"
-#include "include/ykcore/ykdef.h"
-#include "include/ykcore/ykcore.h"
-#include "include/ykcore/ykstatus.h"
+#include "../include/yubikey.h"
+#include "../include/ykcore/ykdef.h"
+#include "../include/ykcore/ykcore.h"
+#include "../include/ykcore/ykstatus.h"
 
 /* Node V8 function declarations */
 #include <iostream>

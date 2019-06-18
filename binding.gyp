@@ -3,7 +3,7 @@
     'targets': [
         {
             'target_name': 'HID',
-            'sources': [ 'HID.cc' ],
+            'sources': [ './src/HID.cc' ],
             'defines': [
                 '_LARGEFILE_SOURCE',
                 '_FILE_OFFSET_BITS=64',
@@ -38,7 +38,7 @@
                 [ 'OS=="win"', {
                     'msvs_settings': {
                         'VCLinkerTool': {
-                            'AdditionalLibraryDirectories': ['C:\\msys64\\mingw64\\lib'],
+                            'AdditionalLibraryDirectories': ['<!(echo %cd%)\\windows\\lib'],
                             'AdditionalDependencies': ['setupapi.lib']
                         }
                     },
@@ -47,6 +47,8 @@
                       '-llibyubikey.a',
                       '-llibykpers-1.dll.a',
                       '-llibykpers-1.a',
+                      '-llibjson.a',
+                      '-llibjson.dll.a',
                     ],
                     'direct_dependent_settings': {
                         'include_dirs': [

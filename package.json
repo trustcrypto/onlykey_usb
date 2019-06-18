@@ -2,7 +2,7 @@
   "name": "@trustcrypto/onlykey_usb",
   "version": "0.0.15",
   "description": "Cross platform USB communication transport",
-  "main": "./onlykey_usb.js",
+  "main": "./nodehid.js",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -14,7 +14,7 @@
     "onlykey"
   ],
   "scripts": {
-    "test": "node test.js",
+    "test": "node ./src/test.js",
     "prepublish": "git submodule update --init",
     "install": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --all --verbose --include-regex \"HID.*node$\"",

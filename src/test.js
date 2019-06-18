@@ -1,7 +1,7 @@
 
 var os = require('os');
 
-var HID = require('./');
+var HID = require('../');
 
 device = new HID.HID(0);
 
