@@ -12,17 +12,7 @@ function setDriverType(type) {
 var binding = null;
 function loadBinding() {
     if( !binding ) {
-        if( os.platform() === 'linux' ) {
-            // Linux defaults to hidraw
-            if( !driverType || driverType === 'hidraw' ) {
-                binding = require('bindings')('HID-hidraw.node');
-            } else {
-                binding = require('bindings')('HID.node');
-            }
-        }
-        else {
-            binding = require('bindings')('HID.node');
-        }
+        binding = require('bindings')('HID.node');
     }
 }
 
@@ -126,6 +116,4 @@ function showdevices() {
 
 //Expose API
 exports.HID = HID;
-exports.devices = showdevices;
-exports.setDriverType = setDriverType;
 // exports.devices = binding.devices;
