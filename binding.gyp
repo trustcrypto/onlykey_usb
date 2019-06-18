@@ -73,9 +73,6 @@
             'cflags': ['-g', '-exceptions'],
             'cflags_cc': ['-g', '-exceptions']
         } # target HID
-        
-
 
     ]
 }
-
