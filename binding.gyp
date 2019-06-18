@@ -60,6 +60,7 @@
                         "files": [
                              "windows/bin/libykpers-1-1.dll",
                              "windows/bin/libyubikey-0.dll",
+                             "windows/bin/libjson-c-2.dll",
                         ]
                       }
                     ]
