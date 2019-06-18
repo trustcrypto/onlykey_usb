@@ -279,7 +279,7 @@ HID::recvAsync(uv_work_t* req)
         &bytes_read)) {
     throw JSException("Failed to read from OnlyKey");
   }
-  yubikey_hex_encode((char *)buf, (char *)buf, RESPONSE_LENGTH);
+  //yubikey_hex_encode((char *)buf, (char *)buf, RESPONSE_LENGTH);
   if (bytes_read <= 0) {
     iocb->_error = new JSException("Failed to read any data from OnlyKey");
   } else {
