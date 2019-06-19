@@ -13,6 +13,9 @@
             ],
             'conditions': [
                 [ 'OS=="mac"', {
+                'include_dirs': [
+                      'mac/lib',
+                    ],
             		"libraries": [
 					"-lm", "-lykpers-1.1", "-lyubikey"
 			        ],
