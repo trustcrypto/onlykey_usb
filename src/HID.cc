@@ -442,17 +442,6 @@ NAN_METHOD(HID::write)
   }
 }
 
-static string
-narrow(wchar_t* wide)
-{
-  wstring ws(wide);
-  ostringstream os;
-  for (size_t i = 0; i < ws.size(); i++) {
-    os << os.narrow(ws[i], '?');
-  }
-  return os.str();
-}
-
 
 static void
 deinitialize(void*)

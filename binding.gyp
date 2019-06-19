@@ -13,11 +13,8 @@
             ],
             'conditions': [
                 [ 'OS=="mac"', {
-                    'include_dirs': [
-                      'mac/lib',
-                    ],
             		"libraries": [
-					"-lm", "-lykpers-1", "-lyubikey"
+					"<!(pwd)/mac/lib/libykpers-1.1.dylib", "<!(pwd)/mac/lib/libyubikey.0.dylib"
 			        ],
                     'LDFLAGS': [
                         '-framework IOKit',
@@ -34,11 +31,8 @@
                     }
                 }], # OS==mac
                 [ 'OS=="linux"', {
-                    'include_dirs': [
-                      'linux/lib',
-                    ],
             		"libraries": [
-					"-lm", "-lykpers-1", "-lyubikey"
+					"<!(pwd)/linux/lib/libykpers-1.so", "<!(pwd)/linux/lib/libyubikey.so"
 				    ]
                 }], # OS==linux
                 [ 'OS=="win"', {
