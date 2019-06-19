@@ -30,8 +30,8 @@ device.on('error', function(err) {
     console.log("error:",err);
 });
 
-console.log("Waiting 100ms for response");
+console.log("Waiting 200ms for response");
 setTimeout( function() {
     console.log("Done");
     device.close();
-}, 100);
+}, 200);
