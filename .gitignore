@@ -20,3 +20,7 @@ build/Release/.deps/Release/obj.target/onlykey_usb/onlykey_usb.o.d
 build/Release/.deps/Release/onlykey_usb.node.d
 
 build/Release/obj.target/onlykey_usb/onlykey_usb.o
+
+*.log
+
+package-lock.json
