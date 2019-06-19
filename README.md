@@ -1,6 +1,14 @@
 # Node.js addon for USB communication with OnlyKey
 
-## Pre-requisites
+## Installing from npm repository
+
+```
+$ npm install onlykey_usb
+```
+
+## Installing from source
+
+### Pre-requisites
 
 Install needed dependencies
 
@@ -20,15 +28,7 @@ $ make check
 $ sudo make install
 ```
 
-## Installing from npm repository
-
-```
-$ npm install onlykey_usb
-```
-
-## Installing from source
-
-Compile from source code:
+Build from source code:
 ```
 $ npm install --build-from-source
 ```
