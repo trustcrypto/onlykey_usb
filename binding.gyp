@@ -32,7 +32,7 @@
                 }], # OS==mac
                 [ 'OS=="linux"', {
             		"libraries": [
-					"-lm", "-lykpers-1.1", "-lyubikey"
+					"-lm", "-lykpers-1", "-lyubikey"
 				    ]
                 }], # OS==linux
                 [ 'OS=="win"', {
