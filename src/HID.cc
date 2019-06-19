@@ -117,6 +117,7 @@
 #include <nan.h>
 //#include <unistd.h>
 #include <time.h>
+#include <stdio.h>
 
 /* YubiKey specific function declarations */
 #include "../include/yubikey.h"
@@ -135,9 +136,7 @@ using namespace std;
 using namespace v8;
 using namespace node;
 
-#define CHALLENGE_LENGTH 64
-#define RESPONSE_LENGTH SHA1_MAX_BLOCK_SIZE
-#define RESPONSE_LENGTH_HEX SHA1_MAX_BLOCK_SIZE*2
+#define RESPONSE_LENGTH 64
 
 
 // //////////////////////////////////////////////////////////////////
@@ -204,21 +203,25 @@ private:
   void readResultsToJSCallbackArguments(ReceiveIOCB* iocb, Local<Value> argv[]);
 
   YK_KEY *yk;
+  unsigned char yk_cmd;
 };
 
 HID::HID()
 {
   yk = NULL;
+  yk_cmd = 0;
 
   if (!yk_init()) {
       throw JSException("Failed to initialize OnlyKey");
   }
 
-  static const int pids[] = {0x0486, 0x60fc};
+  static const int pids[] = {0x0486, 0x60fc, 0x0010};
 
-  if ((yk = yk_open_key_vid_pid(0x16c0, pids, 2, 0)) == NULL) {
-    if ((yk = yk_open_key_vid_pid(0x1d50, pids, 2, 0)) == NULL) {
-      throw JSException("Failed to initialize OnlyKey");
+  if ((yk = yk_open_key_vid_pid(0x16c0, pids, 3, 0)) == NULL) {
+    if ((yk = yk_open_key_vid_pid(0x1d50, pids, 3, 0)) == NULL) {
+      if ((yk = yk_open_key_vid_pid(0x1050, pids, 3, 0)) == NULL) {
+        throw JSException("Failed to initialize OnlyKey");
+      }
     }
   }
 }
@@ -244,16 +247,15 @@ HID::write(const databuf_t& message)
   }
   //unsigned char buf[message.size()];
 
-  int yk_cmd = 0;
-  yk_cmd = SLOT_CHAL_HMAC1;
+
   unsigned char* buf = new unsigned char[message.size()];
   unsigned char* p = buf;
 
   for (vector<unsigned char>::const_iterator i = message.begin(); i != message.end(); i++) {
     *p++ = *i;
   }
-
-  if (! yk_write_to_key(yk, yk_cmd, buf, message.size())) {
+  yk_cmd = buf[message.size()-1];
+  if (! yk_write_to_key(yk, yk_cmd, buf, message.size()-1)) {
     throw JSException("Failed to write to OnlyKey");
   }
 
@@ -268,22 +270,28 @@ HID::recvAsync(uv_work_t* req)
   ReceiveIOCB* iocb = static_cast<ReceiveIOCB*>(req->data);
   HID* hid = iocb->_hid;
 
-  unsigned char buf[RESPONSE_LENGTH];
+  unsigned char response[RESPONSE_LENGTH] = {0};
   unsigned int flags = 0;
-  unsigned int bytes_read = 0;
-  int yk_cmd = 0;
-  yk_cmd = SLOT_CHAL_HMAC1;
-  if (! yk_read_response_from_key(hid->yk, yk_cmd, flags,
-        buf, RESPONSE_LENGTH,
-        RESPONSE_LENGTH,
-        &bytes_read)) {
-    throw JSException("Failed to read from OnlyKey");
-  }
-  //yubikey_hex_encode((char *)buf, (char *)buf, RESPONSE_LENGTH);
-  if (bytes_read <= 0) {
-    iocb->_error = new JSException("Failed to read any data from OnlyKey");
+  flags |= YK_FLAG_MAYBLOCK;
+  unsigned int bytes_read = 1;
+  unsigned int expected_bytes;
+  if (hid->yk_cmd == 0x30 || hid->yk_cmd == 0x38) {
+    expected_bytes = 22;
   } else {
-    iocb->_data = vector<unsigned char>(buf, buf + bytes_read);
+    expected_bytes = RESPONSE_LENGTH;
+  }
+
+  yk_read_response_from_key(hid->yk, hid->yk_cmd, flags,
+        response, expected_bytes,
+        expected_bytes,
+        &bytes_read);
+
+  if (bytes_read == 0) {
+     // Todo fix this, response is received but then error is received after that because multiple
+     // yk_read_response_from_key are called
+     iocb->_error = new JSException("Failed to read any data from OnlyKey");
+  } else if (bytes_read > 1) {
+    iocb->_data = vector<unsigned char>(response, response + bytes_read);
   }
 }
 
@@ -319,6 +327,8 @@ HID::recvAsyncDone(uv_work_t* req)
   iocb->_hid->readResultsToJSCallbackArguments(iocb, argv);
   iocb->_hid->Unref();
 
+
+
   Nan::TryCatch tryCatch;
   //iocb->_callback->Call(2, argv);
   Nan::AsyncResource resource("node-hid recvAsyncDone");
@@ -326,7 +336,6 @@ HID::recvAsyncDone(uv_work_t* req)
   if (tryCatch.HasCaught()) {
       Nan::FatalException(tryCatch);
   }
-
   delete req;
   delete iocb->_callback;
 

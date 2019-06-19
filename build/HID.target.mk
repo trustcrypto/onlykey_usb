@@ -12,7 +12,8 @@ DEFS_Debug := \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
-	'-D_DEBUG'
+	'-D_DEBUG' \
+	'-DV8_ENABLE_CHECKS'
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
@@ -31,10 +32,9 @@ CFLAGS_C_Debug := \
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
-	-std=gnu++0x \
+	-std=gnu++1y \
 	-stdlib=libc++ \
 	-fno-rtti \
-	-fno-threadsafe-statics \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -44,13 +44,13 @@ CFLAGS_OBJC_Debug :=
 CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
-	-I/Users/t/.node-gyp/5.0.0/include/node \
-	-I/Users/t/.node-gyp/5.0.0/src \
-	-I/Users/t/.node-gyp/5.0.0/deps/openssl/config \
-	-I/Users/t/.node-gyp/5.0.0/deps/openssl/openssl/include \
-	-I/Users/t/.node-gyp/5.0.0/deps/uv/include \
-	-I/Users/t/.node-gyp/5.0.0/deps/zlib \
-	-I/Users/t/.node-gyp/5.0.0/deps/v8/include \
+	-I/Users/t/.node-gyp/10.16.0/include/node \
+	-I/Users/t/.node-gyp/10.16.0/src \
+	-I/Users/t/.node-gyp/10.16.0/deps/openssl/config \
+	-I/Users/t/.node-gyp/10.16.0/deps/openssl/openssl/include \
+	-I/Users/t/.node-gyp/10.16.0/deps/uv/include \
+	-I/Users/t/.node-gyp/10.16.0/deps/zlib \
+	-I/Users/t/.node-gyp/10.16.0/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 DEFS_Release := \
@@ -80,10 +80,9 @@ CFLAGS_C_Release := \
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
-	-std=gnu++0x \
+	-std=gnu++1y \
 	-stdlib=libc++ \
 	-fno-rtti \
-	-fno-threadsafe-statics \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -93,13 +92,13 @@ CFLAGS_OBJC_Release :=
 CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
-	-I/Users/t/.node-gyp/5.0.0/include/node \
-	-I/Users/t/.node-gyp/5.0.0/src \
-	-I/Users/t/.node-gyp/5.0.0/deps/openssl/config \
-	-I/Users/t/.node-gyp/5.0.0/deps/openssl/openssl/include \
-	-I/Users/t/.node-gyp/5.0.0/deps/uv/include \
-	-I/Users/t/.node-gyp/5.0.0/deps/zlib \
-	-I/Users/t/.node-gyp/5.0.0/deps/v8/include \
+	-I/Users/t/.node-gyp/10.16.0/include/node \
+	-I/Users/t/.node-gyp/10.16.0/src \
+	-I/Users/t/.node-gyp/10.16.0/deps/openssl/config \
+	-I/Users/t/.node-gyp/10.16.0/deps/openssl/openssl/include \
+	-I/Users/t/.node-gyp/10.16.0/deps/uv/include \
+	-I/Users/t/.node-gyp/10.16.0/deps/zlib \
+	-I/Users/t/.node-gyp/10.16.0/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 OBJS := \
@@ -135,6 +134,7 @@ LDFLAGS_Debug := \
 	-framework IOKit \
 	-framework CoreFoundation \
 	-undefined dynamic_lookup \
+	-Wl,-no_pie \
 	-Wl,-search_paths_first \
 	-mmacosx-version-min=10.9 \
 	-arch x86_64 \
@@ -145,12 +145,14 @@ LIBTOOLFLAGS_Debug := \
 	-framework IOKit \
 	-framework CoreFoundation \
 	-undefined dynamic_lookup \
+	-Wl,-no_pie \
 	-Wl,-search_paths_first
 
 LDFLAGS_Release := \
 	-framework IOKit \
 	-framework CoreFoundation \
 	-undefined dynamic_lookup \
+	-Wl,-no_pie \
 	-Wl,-search_paths_first \
 	-mmacosx-version-min=10.9 \
 	-arch x86_64 \
@@ -161,6 +163,7 @@ LIBTOOLFLAGS_Release := \
 	-framework IOKit \
 	-framework CoreFoundation \
 	-undefined dynamic_lookup \
+	-Wl,-no_pie \
 	-Wl,-search_paths_first
 
 LIBS := \
