@@ -13,11 +13,11 @@
             ],
             'conditions': [
                 [ 'OS=="mac"', {
-                'include_dirs': [
+                    'include_dirs': [
                       'mac/lib',
                     ],
             		"libraries": [
-					"-lm", "-lykpers-1.1", "-lyubikey"
+					"-lm", "-lykpers-1", "-lyubikey"
 			        ],
                     'LDFLAGS': [
                         '-framework IOKit',
@@ -34,6 +34,9 @@
                     }
                 }], # OS==mac
                 [ 'OS=="linux"', {
+                    'include_dirs': [
+                      'linux/lib',
+                    ],
             		"libraries": [
 					"-lm", "-lykpers-1", "-lyubikey"
 				    ]
