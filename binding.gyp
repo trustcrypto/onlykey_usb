@@ -14,7 +14,7 @@
             'conditions': [
                 [ 'OS=="mac"', {
             		"libraries": [
-					"<!(pwd)/mac/lib/libykpers-1.1.dylib", "<!(pwd)/mac/lib/libyubikey.0.dylib"
+					"<!(pwd)/mac/lib/libykpers-1.a", "<!(pwd)/mac/lib/libyubikey.a"
 			        ],
                     'LDFLAGS': [
                         '-framework IOKit',
@@ -28,12 +28,34 @@
                             '-framework IOKit',
                             '-framework CoreFoundation'
                         ],
-                    }
+                    },
+                     "copies": [
+                      {
+                        "destination": "build/Release",
+                        "files": [
+                             "mac/lib/libykpers-1.a",
+                             "mac/lib/libyubikey.a",
+                              "mac/lib/libykpers-1.1.dylib",
+                              "mac/lib/libyubikey.0.dylib"
+                        ]
+                      }
+                    ]
                 }], # OS==mac
                 [ 'OS=="linux"', {
             		"libraries": [
 					"<!(pwd)/linux/lib/libykpers-1.so", "<!(pwd)/linux/lib/libyubikey.so"
-				    ]
+				    ],
+                     "copies": [
+                      {
+                        "destination": "build/Release",
+                        "files": [
+                             "linux/lib/libykpers-1.so",
+                             "linux/lib/libyubikey.so",
+                             "linux/lib/libykpers-1.a",
+                             "linux/lib/libyubikey.a",
+                        ]
+                      }
+                    ]
                 }], # OS==linux
                 [ 'OS=="win"', {
                     'msvs_settings': {
