@@ -15,7 +15,6 @@
   ],
   "scripts": {
     "test": "node ./src/hmacsha1.js",
-    "prepublish": "git submodule update --init",
     "install": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --all --verbose --include-regex \"HID.*node$\"",
     "prebuild-upload": "prebuild --upload-all",
