@@ -1,6 +1,6 @@
 {
   "name": "@trustcrypto/onlykey_usb",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Cross platform USB communication transport",
   "main": "./main.js",
   "engines": {

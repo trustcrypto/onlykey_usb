@@ -251,15 +251,15 @@ HID::HID()
 void
 HID::close()
 {
-  if (hid->yk) {
-    if (!yk_close_key(hid->yk)) {
+  if (yk) {
+    if (!yk_close_key(yk)) {
         throw JSException("Failed to close OnlyKey");
     }
 
     if (!yk_release()) {
       throw JSException("Failed to release OnlyKey");
     }
-    hid->yk=0;
+    yk=0;
   }
 }
 
