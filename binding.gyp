@@ -43,7 +43,7 @@
                 }], # OS==mac
                 [ 'OS=="linux"', {
             		"libraries": [
-					"<!(pwd)/linux/lib/libykpers-1.so", "<!(pwd)/linux/lib/libyubikey.so"
+					"<!(pwd)/linux/lib/libykpers-1.a", "<!(pwd)/linux/lib/libyubikey.a"
 				    ],
                      "copies": [
                       {
